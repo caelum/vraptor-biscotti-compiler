@@ -19,7 +19,7 @@ public class Compiler {
 	private final File i18nOutput;
 
 	public Compiler(File baseDir) {
-		this.i18nOutput = new File("target/i18n-classes", "i18n");
+		this.i18nOutput = new File(baseDir, "i18n");
 		i18nOutput.mkdirs();
 	}
 

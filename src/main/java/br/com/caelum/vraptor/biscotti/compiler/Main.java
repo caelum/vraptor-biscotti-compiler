@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		File input = new File("src/main/resources");
-		File baseDir = new File(".");
+		File output = new File("target/i18n-classes");
 		for (int i = 0; i < args.length; i++) {
 			if (args[i].equals("-h")) {
 				help();
@@ -19,11 +19,11 @@ public class Main {
 			}
 			if (args[i].equals("-i")) {
 				input = new File(args[++i]);
-			} else if (args[i].equals("-d")) {
-				baseDir = new File(args[++i]);
+			} else if (args[i].equals("-o")) {
+				output = new File(args[++i]);
 			}
 		}
-		new Compiler(baseDir).compile(input);
+		new Compiler(output).compile(input);
 	}
 
 	private static void help() {
