@@ -13,14 +13,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Compiler {
 
 	private final File i18nOutput;
 
-	public Compiler(File output) {
-		this.i18nOutput = new File(output, "i18n");
+	public Compiler(File baseDir) {
+		this.i18nOutput = new File("target/i18n-classes", "i18n");
 		i18nOutput.mkdirs();
 	}
 
