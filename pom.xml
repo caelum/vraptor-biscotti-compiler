@@ -52,7 +52,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>br.com.caelum.vraptor.biscotti.compiler.CommandLineCompiler</mainClass>
+							<mainClass>br.com.caelum.vraptor.biscotti.compiler.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

@@ -46,6 +46,7 @@ public class Compiler {
 		lines.add("import java.util.*;");
 		lines.add("import javax.enterprise.context.ApplicationScoped;");
 		lines.add("import br.com.caelum.vraptor.i18n.*;");
+		lines.add("import br.com.caelum.vraptor.biscotti.*;");
 		lines.add("import javax.enterprise.inject.Produces;");
 		lines.add("import javax.inject.Inject;");
 
@@ -78,7 +79,7 @@ public class Compiler {
 			System.out.println("Compiling " + file.getName());
 			InputStreamReader reader = new InputStreamReader(new FileInputStream(
 					file), "UTF-8");
-			TypeCollector collector = new TypeCollector();
+			TypeCollector collector = new TypeCollector(file.getName());
 			collector.collect(reader);
 			List<JavaCode> javas = collector.getRoot().toJava();
 			String language = extractLanguageFrom(file.getName());

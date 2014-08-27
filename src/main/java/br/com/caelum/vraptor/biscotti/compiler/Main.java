@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		File input = new File("src/main/resources");
-		File output = new File("target/i18n-classes");
+		File output = new File("target/i18n");
 		for (int i = 0; i < args.length; i++) {
 			if (args[i].equals("-h")) {
 				help();

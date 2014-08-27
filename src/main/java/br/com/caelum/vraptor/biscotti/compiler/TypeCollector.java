@@ -14,15 +14,12 @@ import java.util.Set;
 public class TypeCollector {
 
 	private final Map<String, MessageType> types = new HashMap<>();
-	private final Transformer transformer;
+	private final Transformer transformer = new DefaultTransformer();
+	private final String name;
 
-	public TypeCollector(Transformer transformer) {
-		this.transformer = transformer;
+	public TypeCollector(String name) {
+		this.name = name;
 		types.put("Messages", new MessageType("Messages", "Messages"));
-	}
-	
-	public TypeCollector() {
-		this(new DefaultTransformer());
 	}
 	
 	public void collect(Map<String, String> map) {

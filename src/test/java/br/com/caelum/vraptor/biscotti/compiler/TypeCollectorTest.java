@@ -19,7 +19,7 @@ public class TypeCollectorTest {
 
 	@Before
 	public void setup() {
-		this.collector = new TypeCollector(new NullTransformer());
+		this.collector = new TypeCollector("");
 	}
 
 	@Test
