@@ -49,6 +49,7 @@ public class Compiler {
 		lines.add("import javax.enterprise.inject.Produces;");
 		lines.add("import javax.inject.Inject;");
 
+		lines.add("@javax.enterprise.context.RequestScoped");
 		lines.add("public class AllMessages {");
 		lines.add("	private final static Map<String, Messages> messages = new HashMap<>();");
 		lines.add("	static {");
@@ -66,7 +67,17 @@ public class Compiler {
 		lines.add("	}");
 		lines.add("	@Produces");
 		lines.add("	public Messages messages() {");
-		lines.add("		return messages.get(language.get());");
+		lines.add("		return languageFor(language.get());");
+		lines.add("	}");
+		lines.add("	");
+		lines.add("	private Messages languageFor(String language) {");
+		lines.add("		if (messages.containsKey(language)) {");
+		lines.add("		return messages.get(language);");
+		lines.add("		}");
+		lines.add("		if (language.contains(\"_\")) {");
+		lines.add("		return languageFor(language.substring(0, language.lastIndexOf(\"_\")));");
+		lines.add("		}");
+		lines.add("		return messages.get(\"\");");
 		lines.add("	}");
 		lines.add("}");
 		Files.write(path, lines);
