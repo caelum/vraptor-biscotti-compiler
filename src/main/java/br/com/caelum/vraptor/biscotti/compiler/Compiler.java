@@ -45,31 +45,29 @@ public class Compiler {
 		lines.add("package i18n;\n");
 		lines.add("import java.util.*;");
 		lines.add("import javax.enterprise.context.ApplicationScoped;");
-		lines.add("import br.com.caelum.vraptor.i18n.*;");
 		lines.add("import br.com.caelum.vraptor.biscotti.*;");
 		lines.add("import javax.enterprise.inject.Produces;");
 		lines.add("import javax.inject.Inject;");
 
-		lines.add("@ApplicationScoped");
 		lines.add("public class AllMessages {");
-		lines.add("	private Map<String, Messages> messages = new HashMap<>();");
-		lines.add("	{");
+		lines.add("	private final static Map<String, Messages> messages = new HashMap<>();");
+		lines.add("	static {");
 		languages.stream()
 				.map(l -> String.format("		messages.put(\"%s\", new Messages%s());", l, l.isEmpty() ? "" : "_" + l))
 				.forEach(lines::add);
 		lines.add("	}");
-		lines.add("private CurrentLanguage language;");
-		lines.add("/** @deprecated CDI only */");
-		lines.add("AllMessages() {");
-		lines.add("}");
-		lines.add("@Inject");
-		lines.add("public AllMessages(CurrentLanguage language) {");
-		lines.add("this.language = language;");
-		lines.add("}");
-		lines.add("@Produces");
-		lines.add("public Messages messages() {");
-		lines.add("return messages.get(language.get());");
-		lines.add("}");
+		lines.add("	private CurrentLanguage language;");
+		lines.add("	/** @deprecated CDI only */");
+		lines.add("	AllMessages() {");
+		lines.add("	}");
+		lines.add("	@Inject");
+		lines.add("	public AllMessages(CurrentLanguage language) {");
+		lines.add("		this.language = language;");
+		lines.add("	}");
+		lines.add("	@Produces");
+		lines.add("	public Messages messages() {");
+		lines.add("		return messages.get(language.get());");
+		lines.add("	}");
 		lines.add("}");
 		Files.write(path, lines);
 	}
